@@ -1,37 +1,118 @@
-package com.example.vishnu.spidertaskthree;
-/*-----------------------------------com.example.vishnu.spidertaskthree.Movie.java-----------------------------------*/
+        package com.example.vishnu.spidertaskthree;
 
-        import java.util.HashMap;
-        import java.util.Map;
+        import com.google.gson.annotations.Expose;
+        import com.google.gson.annotations.SerializedName;
+        import com.j256.ormlite.field.DatabaseField;
+        import com.j256.ormlite.table.DatabaseTable;
+
         import org.apache.commons.lang.builder.EqualsBuilder;
         import org.apache.commons.lang.builder.HashCodeBuilder;
         import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Movie {
 
-    private long id = 0L;
+    @DatabaseField(generatedId = true)
+    private long id = 0;
 
+    @DatabaseField
+    @SerializedName("Title")
+    @Expose
     private String title;
+
+    @DatabaseField
+    @SerializedName("Year")
+    @Expose
     private String year;
+
+    @DatabaseField
+    @SerializedName("Rated")
+    @Expose
     private String rated;
+
+    @DatabaseField
+    @SerializedName("Released")
+    @Expose
     private String released;
+
+    @DatabaseField
+    @SerializedName("Runtime")
+    @Expose
     private String runtime;
+
+    @DatabaseField
+    @SerializedName("Genre")
+    @Expose
     private String genre;
+
+    @DatabaseField
+    @SerializedName("Director")
+    @Expose
     private String director;
+
+    @DatabaseField
+    @SerializedName("Writer")
+    @Expose
     private String writer;
+
+    @DatabaseField
+    @SerializedName("Actors")
+    @Expose
     private String actors;
+
+    @DatabaseField
+    @SerializedName("Plot")
+    @Expose
     private String plot;
+
+    @DatabaseField
+    @SerializedName("Language")
+    @Expose
     private String language;
+
+    @DatabaseField
+    @SerializedName("Country")
+    @Expose
     private String country;
+
+    @DatabaseField
+    @SerializedName("Awards")
+    @Expose
     private String awards;
+
+    @DatabaseField
+    @SerializedName("Poster")
+    @Expose
     private String poster;
+
+    @DatabaseField
+    @SerializedName("Metascore")
+    @Expose
     private String metascore;
+
+    @DatabaseField
+    @SerializedName("imdbRating")
+    @Expose
     private String imdbRating;
+
+    @DatabaseField
+    @SerializedName("imdbVotes")
+    @Expose
     private String imdbVotes;
+
+    @DatabaseField
+    @SerializedName("imdbID")
+    @Expose
     private String imdbID;
+
+    @DatabaseField
+    @SerializedName("Type")
+    @Expose
     private String type;
+
+    @DatabaseField
+    @SerializedName("Response")
+    @Expose
     private String response;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * No args constructor for use in serialization
@@ -63,11 +144,7 @@ public class Movie {
      * @param rated
      * @param writer
      */
-    public Movie(String title, String year, String rated, String released, String runtime,
-                 String genre, String director, String writer, String actors, String plot,
-                 String language, String country, String awards, String poster, String metascore,
-                 String imdbRating, String imdbVotes, String imdbID, String type, String response)
-    {
+    public Movie(String title, String year, String rated, String released, String runtime, String genre, String director, String writer, String actors, String plot, String language, String country, String awards, String poster, String metascore, String imdbRating, String imdbVotes, String imdbID, String type, String response) {
         this.title = title;
         this.year = year;
         this.rated = rated;
@@ -89,34 +166,6 @@ public class Movie {
         this.type = type;
         this.response = response;
     }
-
-    /*
-    * @param map
-    */
-
-    public Movie(Map<String, String> map){
-
-        title = map.get("Title");
-        year = map.get("Year");
-        released = map.get("Released");
-        rated = map.get("Rated");
-        runtime = map.get("Runtime");
-        genre = map.get("Genre");
-        director = map.get("Director");
-        writer = map.get("Writer");
-        actors = map.get("Actors");
-        plot = map.get("Plot");
-        language = map.get("Language");
-        country = map.get("Country");
-        awards = map.get("Awards");
-        poster = map.get("Poster");
-        metascore = (map.get("Metascore"));
-        imdbRating = (map.get("imdbRating"));
-        imdbVotes = (map.get("imdbVotes"));
-        type = map.get("Type");
-
-    }
-
 
     /**
      *
@@ -483,17 +532,9 @@ public class Movie {
         return ToStringBuilder.reflectionToString(this);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(title).append(year).append(rated).append(released).append(runtime).append(genre).append(director).append(writer).append(actors).append(plot).append(language).append(country).append(awards).append(poster).append(metascore).append(imdbRating).append(imdbVotes).append(imdbID).append(type).append(response).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(title).append(year).append(rated).append(released).append(runtime).append(genre).append(director).append(writer).append(actors).append(plot).append(language).append(country).append(awards).append(poster).append(metascore).append(imdbRating).append(imdbVotes).append(imdbID).append(type).append(response).toHashCode();
     }
 
     @Override
@@ -505,7 +546,7 @@ public class Movie {
             return false;
         }
         Movie rhs = ((Movie) other);
-        return new EqualsBuilder().append(title, rhs.title).append(year, rhs.year).append(rated, rhs.rated).append(released, rhs.released).append(runtime, rhs.runtime).append(genre, rhs.genre).append(director, rhs.director).append(writer, rhs.writer).append(actors, rhs.actors).append(plot, rhs.plot).append(language, rhs.language).append(country, rhs.country).append(awards, rhs.awards).append(poster, rhs.poster).append(metascore, rhs.metascore).append(imdbRating, rhs.imdbRating).append(imdbVotes, rhs.imdbVotes).append(imdbID, rhs.imdbID).append(type, rhs.type).append(response, rhs.response).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(title, rhs.title).append(year, rhs.year).append(rated, rhs.rated).append(released, rhs.released).append(runtime, rhs.runtime).append(genre, rhs.genre).append(director, rhs.director).append(writer, rhs.writer).append(actors, rhs.actors).append(plot, rhs.plot).append(language, rhs.language).append(country, rhs.country).append(awards, rhs.awards).append(poster, rhs.poster).append(metascore, rhs.metascore).append(imdbRating, rhs.imdbRating).append(imdbVotes, rhs.imdbVotes).append(imdbID, rhs.imdbID).append(type, rhs.type).append(response, rhs.response).isEquals();
     }
 
     public long getId() {
@@ -516,3 +557,4 @@ public class Movie {
         this.id = id;
     }
 }
+

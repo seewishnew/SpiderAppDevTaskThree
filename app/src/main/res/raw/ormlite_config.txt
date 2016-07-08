@@ -1,0 +1,74 @@
+#
+# generated on 2016/07/07 10:29:46
+#
+# --table-start--
+dataClass=com.example.vishnu.spidertaskthree.Movie
+tableName=movie
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=title
+# --field-end--
+# --field-start--
+fieldName=year
+# --field-end--
+# --field-start--
+fieldName=rated
+# --field-end--
+# --field-start--
+fieldName=released
+# --field-end--
+# --field-start--
+fieldName=runtime
+# --field-end--
+# --field-start--
+fieldName=genre
+# --field-end--
+# --field-start--
+fieldName=director
+# --field-end--
+# --field-start--
+fieldName=writer
+# --field-end--
+# --field-start--
+fieldName=actors
+# --field-end--
+# --field-start--
+fieldName=plot
+# --field-end--
+# --field-start--
+fieldName=language
+# --field-end--
+# --field-start--
+fieldName=country
+# --field-end--
+# --field-start--
+fieldName=awards
+# --field-end--
+# --field-start--
+fieldName=poster
+# --field-end--
+# --field-start--
+fieldName=metascore
+# --field-end--
+# --field-start--
+fieldName=imdbRating
+# --field-end--
+# --field-start--
+fieldName=imdbVotes
+# --field-end--
+# --field-start--
+fieldName=imdbID
+# --field-end--
+# --field-start--
+fieldName=type
+# --field-end--
+# --field-start--
+fieldName=response
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

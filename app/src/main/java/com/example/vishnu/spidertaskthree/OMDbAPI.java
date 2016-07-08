@@ -17,7 +17,10 @@ import retrofit2.http.QueryMap;
  */
 public interface OMDbAPI {
 
+    String ENDPOINT = "http://www.omdbapi.com";
+
+
     @GET("/")
-    Call<Movie> getMovie(@QueryMap(encoded = true) Map<String, String> options);
+    rx.Observable<Movie> getMovie(@QueryMap(encoded = false) Map<String, String> options);
 
 }

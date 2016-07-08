@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayoutSearch">
 
-    <EditText
-        android:layout_width="match_parent"
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:hint="Search"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:id="@+id/edtSearch"-->
+        <!--android:imeOptions="actionSearch"-->
+        <!--android:inputType="textAutoComplete"-->
+        <!--/>-->
+
+    <AutoCompleteTextView
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:hint="Search"
-        android:background="?attr/colorPrimary"
-        android:id="@+id/edtSearch"
         android:imeOptions="actionSearch"
-        android:inputType="textAutoComplete"
+        android:inputType="textAutoComplete|textAutoCorrect"
+        android:completionHintView="@layout/custom_autocomplete_item"
+        android:background="?attr/colorPrimary"
+        android:id="@+id/editSearch"
         />
 
 </LinearLayout>
