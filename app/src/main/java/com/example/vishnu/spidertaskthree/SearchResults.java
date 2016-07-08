@@ -275,7 +275,7 @@ public class SearchResults extends AppCompatActivity {
     }
 
 
-    public void refreshDisplay(List<Movie> movies){
+    public void refreshDisplay(final List<Movie> movies){
 
         progressBar.setVisibility(View.GONE);
 
@@ -285,6 +285,7 @@ public class SearchResults extends AppCompatActivity {
                     "\nID: " + movies.get(0).getId());
             gridView.setVisibility(View.VISIBLE);
             gridView.setAdapter(new MovieAdapter(this, movies));
+
         }
 
         else
@@ -323,6 +324,7 @@ public class SearchResults extends AppCompatActivity {
         final TextView add;
         add = (TextView) findViewById(R.id.tryAdding);
         notFound[0] = (TextView) findViewById(R.id.notFound);
+        notFound[0].setVisibility(View.VISIBLE);
         progressBar1[0] = (ProgressBar) findViewById(R.id.progressBar1);
 
         Subscriber<Movie> subscriber = new Subscriber<Movie>() {
@@ -342,6 +344,7 @@ public class SearchResults extends AppCompatActivity {
 
 //
                 notFound[0].setText("Error, try again");
+                notFound[0].setVisibility(View.VISIBLE);
 //
                 progressBar1[0].setVisibility(View.GONE);
 
@@ -361,34 +364,13 @@ public class SearchResults extends AppCompatActivity {
                     final List<Movie> movies = new ArrayList<>();
                     movies.add(movie);
 
+                    add.setText("Try adding new entry: ");
                     add.setVisibility(View.VISIBLE);
 
+                    notFound[0].setVisibility(View.GONE);
+
+
                     refreshDisplay(movies);
-
-                        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
-                                String buf = new Gson().toJson(movie);
-
-                                Log.d(LOG_TAG, buf);
-
-                                Intent intent = new Intent(
-                                        SearchResults.this,
-                                        Details.class
-                                );
-
-                                Log.d(Details.LOG_TAG, "Adding NOT_ADDED");
-
-                                intent.putExtra(MainActivity.ID, NOT_ADDED);
-                                intent.putExtra(MOVIE, buf);
-
-                                startActivityForResult(intent, REQUEST_CODE_DETAILS);
-
-
-                            }
-                        });
-
 
 
                 }
@@ -396,6 +378,7 @@ public class SearchResults extends AppCompatActivity {
                 else
                 {
                     Toast.makeText(SearchResults.this, "Not found online either!", Toast.LENGTH_SHORT).show();
+                    add.setVisibility(View.VISIBLE);
                     add.setText("Not found online either");
                 }
             }
@@ -552,6 +535,9 @@ public class SearchResults extends AppCompatActivity {
                             TextView notFound = (TextView) findViewById(R.id.notFound);
                             notFound.setVisibility(View.GONE);
 
+                            TextView add = (TextView) findViewById(R.id.tryAdding);
+                            add.setVisibility(View.GONE);
+
                             isFoundInDb = false;
 
                             searchDB();
@@ -584,4 +570,6 @@ public class SearchResults extends AppCompatActivity {
         }
 
     }
+
+
 }
