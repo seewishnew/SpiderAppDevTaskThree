@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/sort"
+        android:title="Sort by IMDb Ratings"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/sort2"
+        android:title="Sort by Title"
+        android:orderInCategory="200"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/action_search"
+        android:orderInCategory="10"
+        android:title="search"
+        android:icon="@mipmap/ic_search"
+        app:showAsAction="ifRoom"
+        />
+</menu>

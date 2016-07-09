@@ -32,6 +32,8 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.dao.RawRowMapper;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_ADD = 2;
     public static final int REQUEST_CODE_DETAILS = 3;
     public static final String ID = "ID";
+    public static final int ASC_TITLE = 10;
+    public static final int DSC_RATING = 20;
+    public static final int DEFAULT = 0;
     private boolean isSearchOpen = false;
 
     private boolean permissionGiven = true;
@@ -89,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
 
             movies = new ArrayList<>();
 
-            refreshDisplay();
-
             titles = getSuggestions();
+
+            refreshDisplay(ASC_TITLE);
 
         }
 
@@ -123,9 +128,48 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void refreshDisplay() {
+    private void refreshDisplay(int option) {
 
-        movies = runtimeExceptionDao.queryForAll();
+        if(option == ASC_TITLE)
+        {
+            try {
+
+                QueryBuilder<Movie, Integer> queryBuilder = runtimeExceptionDao.queryBuilder();
+
+                queryBuilder.orderBy("title", true);
+
+                PreparedQuery<Movie> preparedQuery = null;
+                preparedQuery = queryBuilder.prepare();
+
+                movies = runtimeExceptionDao.query(preparedQuery);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else if(option == DSC_RATING){
+            try {
+
+                QueryBuilder<Movie, Integer> queryBuilder = runtimeExceptionDao.queryBuilder();
+
+                queryBuilder.orderBy("imdbRating", false);
+
+                PreparedQuery<Movie> preparedQuery = null;
+                preparedQuery = queryBuilder.prepare();
+
+                movies = runtimeExceptionDao.query(preparedQuery);
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        else{
+                movies = runtimeExceptionDao.queryForAll();
+        }
 
         if(movies.size()>0)
         {
@@ -273,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 Log.d(LOG_TAG, "Deleted " + movieBuf.getId() +"\nO/P: " +op);
 
-                                refreshDisplay();
+                                refreshDisplay(ASC_TITLE);
                             }
                         })
                         .show();
@@ -288,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main_1, menu);
         item = menu.findItem(R.id.action_search);
         return true;
     }
@@ -398,6 +442,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        else if(id == R.id.sort){
+             refreshDisplay(DSC_RATING);
+         }
+
+        else{
+             refreshDisplay(ASC_TITLE);
+         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -444,7 +496,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_SEARCH && resultCode == RESULT_OK){
-            refreshDisplay();
+            refreshDisplay(ASC_TITLE);
             titles = getSuggestions();
             if(data!=null){
 
@@ -462,7 +514,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(requestCode == REQUEST_CODE_DETAILS && resultCode == RESULT_OK){
-            refreshDisplay();
+            refreshDisplay(ASC_TITLE);
             titles = getSuggestions();
             if(data!=null){
                 if(data.getBooleanExtra(SearchResults.DELETED, false)){
